@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Create — Emergency QR{% endblock %}
+{% block description %}Create your free emergency QR code. Add up to 3 trusted contacts and a 4-digit PIN. Print it and carry it with you.{% endblock %}
+{% block topbar %}Create your QR{% endblock %}
+{% block content %}
+
+<div class="create-wrapper">
+
+  <img src="{{ url_for('static', filename='images/favicon.ico') }}"
+       alt="Emergency QR" class="create-wrapper__icon">
+
+  <h1 class="create-wrapper__title">Create your emergency QR</h1>
+  <p class="create-wrapper__lede">
+    Start with your name so responders know who this QR belongs to.
+    Then add up to three emergency contacts. Your PIN is only needed to edit later.
+  </p>
+
+  <form method="POST" action="{{ url_for('main.create') }}">
+
+    <div class="form-field owner-field">
+      <label for="owner_name">Your name <span class="required">(required)</span></label>
+      <input type="text" id="owner_name" name="owner_name"
+             placeholder="e.g. Maria Lopez" required>
+    </div>
+
+    <div class="form-field owner-field">
+      <label for="label">Label <span class="optional">(optional)</span></label>
+      <input type="text" id="label" name="label" maxlength="40"
+             placeholder="e.g. Maria, or 1990-05-14">
+      <small class="form-hint">
+  <strong>Avoid medical or sensitive data.</strong> This label is public and visible to anyone who scans the QR.
+</small>
+    </div>
+
+    <div class="contact-grid">
+
+      <div class="contact-column">
+        <h3 class="contact-column__title">Contact 1 <span class="required">(required)</span></h3>
+        <div class="form-field">
+          <label for="name1">Name</label>
+          <input type="text" id="name1" name="name1" required>
+        </div>
+        <div class="form-field">
+          <label for="phone1">Phone</label>
+          <input type="tel" id="phone1" name="phone1" required>
+        </div>
+      </div>
+
+      <div class="contact-column">
+        <h3 class="contact-column__title">Contact 2 <span class="optional">(optional)</span></h3>
+        <div class="form-field">
+          <label for="name2">Name</label>
+          <input type="text" id="name2" name="name2">
+        </div>
+        <div class="form-field">
+          <label for="phone2">Phone</label>
+          <input type="tel" id="phone2" name="phone2">
+        </div>
+      </div>
+
+      <div class="contact-column">
+        <h3 class="contact-column__title">Contact 3 <span class="optional">(optional)</span></h3>
+        <div class="form-field">
+          <label for="name3">Name</label>
+          <input type="text" id="name3" name="name3">
+        </div>
+        <div class="form-field">
+          <label for="phone3">Phone</label>
+          <input type="tel" id="phone3" name="phone3">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="create-bottom-row">
+      <div class="form-field create-pin-field">
+        <label for="pin">PIN (4 digits) — only to edit later</label>
+        <input type="password" id="pin" name="pin" pattern="\d{4}" title="4 digits" required>
+      </div>
+
+      <button type="submit" class="btn-send">CREATE QR</button>
+    </div>
+
+  </form>
+
+</div>
+
+{% endblock %}

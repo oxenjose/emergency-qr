@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Check a QR — Emergency QR{% endblock %}
+{% block description %}Upload a photo or PDF of an Emergency QR code to view or edit its saved contacts.{% endblock %}
+{% block topbar %}Check a QR{% endblock %}
+{% block content %}
+
+<div class="create-wrapper">
+
+  <img src="{{ url_for('static', filename='images/favicon.ico') }}"
+       alt="Emergency QR" class="create-wrapper__icon">
+
+  <h1 class="create-wrapper__title">Check a QR</h1>
+  <p class="create-wrapper__lede">
+    Upload a photo, screenshot, or PDF of a QR code to view or edit its emergency
+    contacts. Editing still requires the PIN.
+  </p>
+
+  <form method="POST" action="{{ url_for('main.check') }}"
+        enctype="multipart/form-data" class="check-form">
+
+    <label class="upload-drop" for="qr_image">
+      <input type="file" id="qr_image" name="qr_image"
+             accept="image/*,application/pdf" required class="upload-drop__input">
+      <span class="upload-drop__icon">+</span>
+      <span class="upload-drop__title" id="upload-title">Choose an image or PDF</span>
+      <span class="upload-drop__hint">PNG, JPG, screenshot, or PDF</span>
+    </label>
+
+    <button type="submit" class="btn-send check-form__submit">Check QR</button>
+
+  </form>
+
+</div>
+
+<script>
+  const input = document.getElementById('qr_image');
+  const title = document.getElementById('upload-title');
+  if (input && title) {
+    input.addEventListener('change', () => {
+      if (input.files.length > 0) {
+        title.textContent = input.files[0].name;
+      } else {
+        title.textContent = 'Choose an image or PDF';
+      }
+    });
+  }
+</script>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Edit Contacts{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
+{% block topbar %}Edit Contacts{% endblock %}
+{% block content %}
+
+<div class="create-wrapper">
+
+  <img src="{{ url_for('static', filename='images/favicon.ico') }}"
+       alt="Emergency QR" class="create-wrapper__icon">
+
+  <h1 class="create-wrapper__title">Edit Emergency Contacts</h1>
+
+  {% if authenticated %}
+
+    <form method="POST" action="{{ url_for('main.update', contact_id=contact.id) }}">
+
+      <div class="form-field owner-field">
+        <label for="owner_name">Your name</label>
+        <input type="text" id="owner_name" name="owner_name"
+               value="{{ contact.owner_name }}" required>
+      </div>
+
+      <div class="form-field owner-field">
+        <label for="label">Label <span class="optional">(optional)</span></label>
+        <input type="text" id="label" name="label" maxlength="40"
+               value="{{ contact.label or '' }}"
+               placeholder="e.g. Maria, or 1990-05-14">
+        <small class="form-hint">
+  <strong>Avoid medical or sensitive data.</strong> This label is public and visible to anyone who scans the QR.
+</small>
+        </small>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="contact-column">
+          <h3 class="contact-column__title">Contact 1</h3>
+          <div class="form-field">
+            <label>Name</label>
+            <input type="text" name="name1" value="{{ contact.name1 }}" required>
+          </div>
+          <div class="form-field">
+            <label>Phone</label>
+            <input type="tel" name="phone1" value="{{ contact.phone1 }}" required>
+          </div>
+        </div>
+
+        <div class="contact-column">
+          <h3 class="contact-column__title">Contact 2</h3>
+          <div class="form-field">
+            <label>Name</label>
+            <input type="text" name="name2" value="{{ contact.name2 }}">
+          </div>
+          <div class="form-field">
+            <label>Phone</label>
+            <input type="tel" name="phone2" value="{{ contact.phone2 }}">
+          </div>
+        </div>
+
+        <div class="contact-column">
+          <h3 class="contact-column__title">Contact 3</h3>
+          <div class="form-field">
+            <label>Name</label>
+            <input type="text" name="name3" value="{{ contact.name3 }}">
+          </div>
+          <div class="form-field">
+            <label>Phone</label>
+            <input type="tel" name="phone3" value="{{ contact.phone3 }}">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="create-bottom-row">
+        <div></div>
+        <button type="submit" class="btn-send">UPDATE CONTACTS</button>
+      </div>
+
+    </form>
+
+  {% else %}
+
+    <p class="create-wrapper__lede">Enter your PIN to edit these contacts.</p>
+
+    <form method="POST" action="{{ url_for('main.edit', contact_id=contact.id) }}">
+      <div class="form-field">
+        <label for="pin">PIN</label>
+        <input type="password" id="pin" name="pin" pattern="\d{4}" required>
+      </div>
+      <div class="contact-actions">
+        <button type="submit" class="btn-send">VERIFY PIN</button>
+      </div>
+    </form>
+
+  {% endif %}
+
+</div>
+
+{% endblock %}

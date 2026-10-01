@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}Emergency QR{% endblock %}</title>
+
+  <meta name="description" content="{% block description %}Free emergency QR code with your trusted contacts. No app, no account. Print it and stay reachable when it matters most.{% endblock %}">
+
+  <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+  <!-- Open Graph (WhatsApp, Facebook, LinkedIn, Telegram) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Emergency QR">
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta property="og:image" content="{{ canonical_base_url }}{{ url_for('static', filename='images/og-image.png') }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Emergency QR — Never forget an important number again">
+  <meta property="og:url" content="{{ canonical_base_url }}{{ request.path }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ self.title() }}">
+  <meta name="twitter:description" content="{{ self.description() }}">
+  <meta name="twitter:image" content="{{ canonical_base_url }}{{ url_for('static', filename='images/og-image.png') }}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar__inner">
+      <span class="topbar__text">Your emergency contacts, always within reach</span>
+      <a href="{{ url_for('main.create') }}" class="topbar__cta">Create your QR →</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="{{ url_for('main.index') }}" class="site-nav__brand">
+        <img src="{{ url_for('static', filename='images/favicon.ico') }}" alt="" class="site-nav__logo">
+        <span>Emergency QR</span>
+      </a>
+      <div class="site-nav__links">
+        <a href="{{ url_for('main.index') }}" {% if request.endpoint == 'main.index' %}aria-current="page"{% endif %}>Home</a>
+        <a href="{{ url_for('main.index') }}#how">How it works</a>
+        <a href="{{ url_for('main.check') }}" {% if request.endpoint == 'main.check' %}aria-current="page"{% endif %}>Check QR</a>
+        <a href="{{ url_for('main.create') }}" class="site-nav__cta">Create QR</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for message in messages %}
+            <div class="flash">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <div class="site-footer__title">Emergency QR</div>
+        <div class="site-footer__meta">
+          Simple, fast, free. Works on any device.
+          <span class="footer-sep">•</span>
+          <a href="{{ url_for('main.privacy') }}" class="footer-link">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="site-footer__contact">
+        <div class="site-footer__email">hello@emergency-qr.local</div>
+        <div class="site-footer__social">
+          <a href="#" aria-label="X / Twitter">𝕏</a>
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

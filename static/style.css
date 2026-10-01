@@ -1,0 +1,1360 @@
+/* =========================================================
+   EMERGENCY QR — GLOBAL STYLESHEET
+   =========================================================
+   TABLE OF CONTENTS
+   ---------------------------------------------------------
+   01. Design tokens (variables)
+   02. Reset & base
+   03. Topbar
+   04. Site nav
+   05. Hero
+   06. Buttons (primary / outline / send)
+   07. Steps section
+   08. Flash messages
+   09. Forms (generic)
+   10. Page: Create (wrapper + 3 columns + PIN row)
+   11. Page: Contact
+   12. Page: Created (QR display)
+   13. Page: Created (print section)
+   14. Page: Check QR (upload drop)
+   15. Page: View (banner + contacts)
+   16. Page: View (current QR)
+   17. Footer
+   18. Responsive (all breakpoints)
+   ========================================================= */
+
+
+/* =========================================================
+   01. DESIGN TOKENS
+   ========================================================= */
+
+:root {
+  --color-white: #ffffff;
+  --color-cream: #f7f9f7;
+  --color-mint: #c8f7dc;
+  --color-mint-soft: #e4fbee;
+  --color-green: #0d3b32;
+  --color-green-light: #145448;
+  --color-ink: #0d3b32;
+
+  --color-text: #0d3b32;
+  --color-text-muted: #5a6b66;
+  --color-border: #dfe5e2;
+
+  --font-body: "Helvetica Neue", Arial, sans-serif;
+
+  --nav-height: 100px;        /* aumentado: era 72px */
+  --topbar-height: 64px;      /* aumentado: era 40px */
+  --max-width: 1360px;        /* alineado con el hero (era 1200px) */
+
+  --shadow-card: 0 10px 40px rgba(13, 59, 50, 0.08);
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+
+
+/* =========================================================
+   02. RESET & BASE
+   ========================================================= */
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-cream);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+
+/* =========================================================
+   03. TOPBAR
+   ========================================================= */
+
+.topbar {
+  height: 100px; /* eller t.ex. auto */
+  min-height: 100px;
+  padding: 1rem 0;
+  background: var(--color-green);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+}
+
+.topbar__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.topbar__cta {
+  color: var(--color-mint);
+  font-weight: 600;
+  transition: opacity 0.15s ease;
+}
+
+.topbar__cta:hover { opacity: 0.85; }
+
+
+/* =========================================================
+   04. SITE NAV
+   ========================================================= */
+
+.site-header {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: var(--nav-height);
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-green);
+}
+
+.site-nav__logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  font-size: 1rem;
+}
+
+.site-nav__links a {
+  color: var(--color-text);
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+.site-nav__links a:hover,
+.site-nav__links a:focus-visible { opacity: 1; }
+
+.site-nav__links a[aria-current="page"] {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.site-nav__cta {
+  background: var(--color-green);
+  color: var(--color-white) !important;
+  padding: 14px 28px;
+  border-radius: 28px;
+  opacity: 1 !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.15s ease;
+}
+
+.site-nav__cta:hover {
+  background: var(--color-green-light);
+}
+
+
+/* =========================================================
+   05. HERO
+   ========================================================= */
+
+.hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 96px 48px 120px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.hero__kicker {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-green);
+  opacity: 0.8;
+  margin: 0 0 18px;
+  letter-spacing: 0.01em;
+}
+
+.hero__title {
+  font-size: 3.2rem;
+  line-height: 1.1;
+  font-weight: 700;
+  margin: 0 0 28px;
+  color: var(--color-green);
+  max-width: 26ch;
+}
+
+.hero__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+}
+
+.hero__features li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+
+.hero__features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-green);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Hero image — tamaño y esquinas sin cambios (según pedido) */
+.hero__media img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  border-radius: 0 0 0 200px;
+}
+
+
+/* =========================================================
+   06. BUTTONS
+   ========================================================= */
+
+.btn-primary,
+.btn-outline {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 2px solid transparent;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--color-green);
+  color: var(--color-white);
+  border-color: var(--color-green);
+}
+
+.btn-primary:hover {
+  background: var(--color-green-light);
+  border-color: var(--color-green-light);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-green);
+  border-color: var(--color-green);
+}
+
+.btn-outline:hover {
+  background: var(--color-green);
+  color: var(--color-white);
+}
+
+.btn-send {
+  display: inline-block;
+  background: var(--color-green);
+  color: var(--color-white);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-send:hover,
+.btn-send:focus-visible {
+  background: var(--color-green-light);
+}
+
+
+/* =========================================================
+   07. STEPS SECTION
+   ========================================================= */
+
+.steps {
+  background: var(--color-green);
+  padding: 80px 48px 120px;
+}
+
+.steps__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.steps__title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-mint);
+  text-align: center;
+  margin: 0 0 14px;
+}
+
+.steps__subtitle {
+  text-align: center;
+  color: var(--color-white);
+  opacity: 0.85;
+  max-width: 60ch;
+  margin: 0 auto 64px;
+  font-size: 1rem;
+}
+
+.steps__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.step-card {
+  position: relative;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  padding: 48px 24px 28px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.step-card__number {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 4px solid var(--color-green);
+  color: var(--color-green);
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-green);
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+.step-card__text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin: 0;
+}
+
+
+/* =========================================================
+   08. FLASH MESSAGES
+   ========================================================= */
+
+.flash-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.flash {
+  background: var(--color-mint-soft);
+  border-left: 4px solid var(--color-green);
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  color: var(--color-green);
+}
+
+
+/* =========================================================
+   09. FORMS (generic)
+   ========================================================= */
+
+.form-field { margin-bottom: 18px; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--color-text);
+}
+
+.form-field .required {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-white);
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--color-green);
+  box-shadow: 0 0 0 3px rgba(13, 59, 50, 0.12);
+}
+
+.form-hint {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.owner-field {
+  max-width: 480px;
+  margin: 0 auto 28px;
+}
+
+.owner-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-green);
+}
+
+.owner-field input {
+  padding: 12px 14px;
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   10. PAGE: CREATE
+   ========================================================= */
+
+.create-wrapper {
+  max-width: 960px;
+  margin: 40px auto 64px;
+  padding: 40px 40px 48px;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.create-wrapper__icon {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 16px;
+  object-fit: contain;
+}
+
+.create-wrapper__title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-green);
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+.create-wrapper__lede {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 52ch;
+  margin: 0 auto 32px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.contact-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-column__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-green);
+  margin: 0 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.contact-column__title .required,
+.contact-column__title .optional {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.contact-column .form-field { margin-bottom: 12px; }
+
+.contact-column .form-field label {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+.contact-column .form-field input {
+  padding: 10px 12px;
+  font-size: 0.9rem;
+}
+
+.create-bottom-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.create-pin-field {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.create-bottom-row .btn-send {
+  white-space: nowrap;
+  padding: 14px 32px;
+}
+
+
+/* =========================================================
+   11. PAGE: CONTACT
+   ========================================================= */
+
+.contact-wrapper { max-width: 640px; }
+.contact-wrapper textarea { min-height: 120px; }
+
+.contact-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.contact-actions .btn-send { padding: 14px 36px; }
+
+
+/* =========================================================
+   12. PAGE: CREATED — QR display
+   ========================================================= */
+
+.created-wrapper {
+  max-width: 640px;
+  margin: 40px auto 64px;
+  padding: 40px 40px 48px;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.created-qr {
+  display: flex;
+  justify-content: center;
+  margin: 32px 0;
+}
+
+.created-qr img {
+  width: 260px;
+  height: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px;
+  background: var(--color-white);
+}
+
+.created-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.created-actions .btn-primary,
+.created-actions .btn-outline {
+  padding: 12px 26px;
+  font-size: 0.88rem;
+  border-radius: 24px;
+}
+
+
+/* =========================================================
+   13. PAGE: CREATED — print section
+   ========================================================= */
+
+.created-divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 40px 0 32px;
+}
+
+.created-subtitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-green);
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.created-print-lede {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 46ch;
+  margin: 0 auto 24px;
+}
+
+.print-form {
+  text-align: left;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.print-form__group { margin-bottom: 20px; }
+
+.print-form__label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-green);
+  margin-bottom: 10px;
+}
+
+.print-form__radios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.radio-card {
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-card__box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 2px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-white);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.radio-card input:checked + .radio-card__box {
+  border-color: var(--color-green);
+  background: var(--color-mint-soft);
+}
+
+.radio-card__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-green);
+}
+
+.radio-card__size {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.print-form__copies {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.print-form__copies:focus {
+  outline: none;
+  border-color: var(--color-green);
+  box-shadow: 0 0 0 3px rgba(13, 59, 50, 0.12);
+}
+
+.print-form__submit {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 24px;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.print-form__hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin: 12px 0 0;
+}
+
+
+/* =========================================================
+   14. PAGE: CHECK QR — upload drop
+   ========================================================= */
+
+.check-form {
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.upload-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 36px 20px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  margin-bottom: 20px;
+  background: var(--color-white);
+}
+
+.upload-drop:hover,
+.upload-drop:focus-within {
+  border-color: var(--color-green);
+  background: var(--color-mint-soft);
+}
+
+.upload-drop__input { display: none; }
+
+.upload-drop__icon {
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--color-green);
+  line-height: 1;
+}
+
+.upload-drop__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-green);
+  word-break: break-all;
+}
+
+.upload-drop__hint {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.check-form__submit {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 24px;
+}
+
+
+/* =========================================================
+   15. PAGE: VIEW — banner + contacts
+   ========================================================= */
+
+.view-section {
+  max-width: 720px;
+  margin: 40px auto 64px;
+  padding: 0 32px;
+}
+
+.view-banner {
+  background: var(--color-green);
+  color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  text-align: center;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow-card);
+}
+
+.view-banner__label {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-mint);
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.view-banner__name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  line-height: 1.15;
+  color: var(--color-white);
+}
+
+.view-banner__hint {
+  font-size: 0.92rem;
+  opacity: 0.85;
+  margin: 0 auto;
+  max-width: 44ch;
+}
+
+.view-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 16px rgba(13, 59, 50, 0.04);
+}
+
+.contact-card__name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-green);
+}
+
+.contact-card__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.view-footer-link {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 0.88rem;
+}
+
+.view-footer-link a {
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+
+.view-footer-link a:hover {
+  color: var(--color-green);
+}
+
+
+/* =========================================================
+   16. PAGE: VIEW — current QR
+   ========================================================= */
+
+.view-qr {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.view-qr__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-green);
+  margin: 0 0 8px;
+}
+
+.view-qr__hint {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  margin: 0 auto 24px;
+  max-width: 44ch;
+}
+
+.view-qr__image {
+  display: inline-block;
+  padding: 14px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(13, 59, 50, 0.04);
+}
+
+.view-qr__image img {
+  display: block;
+  width: 260px;
+  height: auto;
+}
+
+
+/* =========================================================
+   17. FOOTER
+   ========================================================= */
+
+.site-footer {
+  background: var(--color-green);
+  color: var(--color-white);
+  margin-top: 80px;
+}
+
+.site-footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 48px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.site-footer__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.site-footer__meta {
+  font-size: 0.82rem;
+  opacity: 0.75;
+  margin-top: 6px;
+}
+
+.site-footer__contact { text-align: right; }
+.site-footer__email { font-size: 0.95rem; }
+
+.site-footer__social {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+  justify-content: flex-end;
+  font-size: 0.9rem;
+}
+
+.site-footer__social a {
+  color: var(--color-mint);
+  transition: opacity 0.15s ease;
+}
+
+.site-footer__social a:hover { opacity: 0.8; }
+
+
+/* =========================================================
+   18. RESPONSIVE — ALL BREAKPOINTS
+   ========================================================= */
+
+/* ---------- 960px: steps go 2-columns ---------- */
+@media (max-width: 960px) {
+  .steps__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 24px;
+  }
+}
+
+/* ---------- 860px: hero stacks, nav/content condenses ---------- */
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 56px 32px 80px;
+    gap: 48px;
+  }
+
+  .hero__title { font-size: 2.4rem; }
+
+  .steps { padding: 60px 32px 100px; }
+  .steps__title { font-size: 1.8rem; }
+  .steps__subtitle { font-size: 0.95rem; margin-bottom: 48px; }
+
+  .create-wrapper {
+    margin: 20px 16px 40px;
+    padding: 24px 20px 32px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .create-wrapper__title { font-size: 1.5rem; }
+
+  .create-bottom-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .create-bottom-row .btn-send { width: 100%; }
+
+  .contact-wrapper .form-row { grid-template-columns: 1fr; }
+
+  .contact-actions { justify-content: stretch; }
+  .contact-actions .btn-send { width: 100%; }
+
+  .created-wrapper {
+    margin: 20px 16px 40px;
+    padding: 28px 20px 36px;
+  }
+
+  .created-actions { flex-direction: column; }
+
+  .created-actions .btn-primary,
+  .created-actions .btn-outline { width: 100%; }
+
+  .print-form__radios { grid-template-columns: 1fr; }
+
+  .site-footer__inner {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .site-footer__contact { text-align: left; }
+  .site-footer__social { justify-content: flex-start; }
+}
+
+/* ---------- 720px: shrink nav padding + topbar ---------- */
+@media (max-width: 720px) {
+  .topbar__inner,
+  .site-nav,
+  .flash-container,
+  .site-footer__inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* ---------- 560px: mobile ---------- */
+@media (max-width: 560px) {
+  .topbar { height: 52px; }
+  .topbar__inner { font-size: 0.8rem; }
+  .topbar__text { display: none; }           /* ocultar mensaje en móvil */
+  .topbar__cta { margin-left: auto; }
+
+  .site-nav {
+    height: 76px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .site-nav__logo { width: 32px; height: 32px; }
+  .site-nav__brand { font-size: 1.05rem; gap: 10px; }
+
+  .site-nav__links { gap: 16px; font-size: 0.85rem; }
+
+  .site-nav__links a:not(.site-nav__cta):not([aria-current="page"]) {
+    display: none;
+  }
+
+  .site-nav__cta {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+
+  .hero { padding: 40px 20px 56px; }
+  .hero__title { font-size: 2rem; }
+  .hero__features li { font-size: 1rem; }
+
+  .steps {
+    padding: 48px 20px 80px;
+  }
+
+  .steps__grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .flash-container { padding-left: 20px; padding-right: 20px; }
+
+  .view-section { padding: 0 20px; }
+  .view-banner { padding: 28px 20px; }
+  .view-banner__name { font-size: 1.5rem; }
+
+  .contact-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-card__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .contact-card__actions .btn-send { text-align: center; }
+
+  .view-qr { margin-top: 36px; padding-top: 28px; }
+  .view-qr__image img { width: 220px; }
+
+  .created-qr img { width: 220px; }
+
+  .site-footer__inner {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+/* =========================================================
+   Privacy Policy Page
+   ========================================================= */
+
+.legal-wrapper {
+  max-width: 800px;
+  margin: 48px auto 80px;
+  padding: 0 32px;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.legal-wrapper h1 {
+  font-size: 2.2rem;
+  color: var(--color-green);
+  margin: 0 0 8px;
+}
+
+.legal-wrapper h2 {
+  font-size: 1.4rem;
+  color: var(--color-green);
+  margin: 40px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.legal-wrapper p,
+.legal-wrapper li {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.legal-wrapper a {
+  color: var(--color-green);
+  text-decoration: underline;
+}
+
+.legal-wrapper ul {
+  padding-left: 20px;
+}
+
+/* Footer link */
+.footer-sep {
+  margin: 0 8px;
+  opacity: 0.5;
+}
+
+.footer-link {
+  color: var(--color-mint);
+  text-decoration: underline;
+  transition: opacity 0.15s ease;
+}
+
+.footer-link:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 560px) {
+  .legal-wrapper {
+    margin: 24px auto 48px;
+    padding: 0 20px;
+  }
+}
+/* =========================================================
+   Error pages — 404 and QR not found
+   ========================================================= */
+
+.error-wrapper {
+  max-width: 640px;
+  margin: 80px auto 120px;
+  padding: 48px 40px;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.error-wrapper--critical {
+  border-top: 6px solid #e63946;
+}
+
+.error-code {
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--color-green);
+  line-height: 1;
+  margin-bottom: 16px;
+  opacity: 0.15;
+  letter-spacing: -0.04em;
+}
+
+.error-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.error-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-green);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.error-text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  max-width: 48ch;
+  margin: 0 auto 20px;
+}
+
+.error-text--small {
+  font-size: 0.85rem;
+  margin-top: 28px;
+}
+
+.error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+/* Emergency callout box — only on qr_not_found */
+
+.emergency-callout {
+  background: #fff5f5;
+  border: 1px solid #ffd5d5;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 32px auto;
+  text-align: left;
+  max-width: 440px;
+}
+
+.emergency-callout__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #c92a2a;
+  margin-bottom: 8px;
+}
+
+.emergency-callout__text {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  margin: 0 0 14px;
+}
+
+.emergency-callout__numbers {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+}
+
+.emergency-callout__numbers li {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  padding: 6px 0;
+  border-bottom: 1px solid #ffe0e0;
+}
+
+.emergency-callout__numbers li:last-child {
+  border-bottom: none;
+}
+
+.emergency-callout__numbers strong {
+  color: #c92a2a;
+  font-size: 1.05rem;
+  margin-right: 6px;
+}
+
+.emergency-callout__note {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  font-style: italic;
+}
+
+@media (max-width: 560px) {
+  .error-wrapper {
+    margin: 40px 16px 64px;
+    padding: 32px 24px;
+  }
+
+  .error-title { font-size: 1.4rem; }
+  .error-code { font-size: 3.5rem; }
+  .error-icon { font-size: 2.8rem; }
+
+  .error-actions {
+    flex-direction: column;
+  }
+
+  .error-actions .btn-primary,
+  .error-actions .btn-outline {
+    width: 100%;
+  }
+
+  .emergency-callout {
+    padding: 20px 22px;
+  }
+}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Emergency QR — Never forget an important number again{% endblock %}
+{% block description %}Create a free emergency QR code with up to 3 trusted contacts. No app, no account. Print it and keep it in your wallet — works on any phone, even when yours is dead, lost, or stolen.{% endblock %}
+{% block content %}
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero__text">
+    <h1 class="hero__title">The tool that speaks For you When you can`t</h1>
+
+    <ul class="hero__features">
+      <li>Your emergency contacts - always within reach</li>
+      <li>Works on any phone — no app to install</li>
+      <li>No account, no password to remember</li>
+      <li>Free, forever</li>
+    </ul>
+
+    <div class="hero__actions">
+      <a href="{{ url_for('main.create') }}" class="btn-primary">Create your QR</a>
+      <a href="#how" class="btn-outline">How it works</a>
+    </div>
+  </div>
+
+  <div class="hero__media">
+    <img src="{{ url_for('static', filename='images/landing.jpg') }}"
+         alt="Emergency QR card being scanned by a phone">
+  </div>
+</section>
+
+<!-- ===================== STEPS ===================== -->
+<section class="steps" id="how">
+  <div class="steps__inner">
+    <h2 class="steps__title">How does it work?</h2>
+    <p class="steps__subtitle">
+      Four simple steps to make sure your loved ones are one scan away — even
+      when your phone isn't.
+    </p>
+
+    <div class="steps__grid">
+
+      <div class="step-card">
+        <div class="step-card__number">1</div>
+        <h3 class="step-card__title">Register your contacts</h3>
+        <p class="step-card__text">
+          Write down up to three emergency contacts and pick a 4-digit PIN.
+          No account, no email, nothing else.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card__number">2</div>
+        <h3 class="step-card__title">Create the QR</h3>
+        <p class="step-card__text">
+          In one click, the system generates a unique QR that points to your
+          contacts. Download it in seconds.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card__number">3</div>
+        <h3 class="step-card__title">Print or save it</h3>
+        <p class="step-card__text">
+          Print the QR and keep it in your wallet, on your phone case, or take
+          a photo of it. Anywhere you can reach it fast.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card__number">4</div>
+        <h3 class="step-card__title">Use it in an emergency</h3>
+        <p class="step-card__text">
+          Anyone can scan it with their own phone — no app, no login. Your
+          contacts appear instantly, ready to call.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

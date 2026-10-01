@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Emergency Contacts — {{ contact.owner_name }}{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
+{% block topbar %}Emergency Contacts{% endblock %}
+{% block content %}
+
+<section class="view-section">
+
+  <div class="view-banner">
+    <div class="view-banner__label">Emergency contacts for</div>
+    <h1 class="view-banner__name">{{ contact.owner_name }}</h1>
+    <p class="view-banner__hint">
+      If this person has been in an accident, please contact one of the people below.
+    </p>
+  </div>
+
+  <div class="view-contacts">
+
+    <div class="contact-card">
+      <div class="contact-card__name">{{ contact.name1 }}</div>
+      <div class="contact-card__actions">
+        <a href="tel:{{ contact.phone1 }}" class="btn-send">CALL</a>
+        <a href="sms:{{ contact.phone1 }}" class="btn-send">MESSAGE</a>
+      </div>
+    </div>
+
+    {% if contact.name2 %}
+    <div class="contact-card">
+      <div class="contact-card__name">{{ contact.name2 }}</div>
+      <div class="contact-card__actions">
+        <a href="tel:{{ contact.phone2 }}" class="btn-send">CALL</a>
+        <a href="sms:{{ contact.phone2 }}" class="btn-send">MESSAGE</a>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if contact.name3 %}
+    <div class="contact-card">
+      <div class="contact-card__name">{{ contact.name3 }}</div>
+      <div class="contact-card__actions">
+        <a href="tel:{{ contact.phone3 }}" class="btn-send">CALL</a>
+        <a href="sms:{{ contact.phone3 }}" class="btn-send">MESSAGE</a>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <!-- ============ CURRENT QR ============ -->
+  <div class="view-qr">
+    <h2 class="view-qr__title">Current QR</h2>
+    <p class="view-qr__hint">This is the QR code linked to these contacts.</p>
+    <div class="view-qr__image">
+      <img src="{{ url_for('qr.generate_qr', contact_id=contact.id) }}?v={{ contact.label|urlencode }}"
+           alt="Emergency QR for {{ contact.owner_name }}">
+    </div>
+  </div>
+  <!-- ==================================== -->
+
+  <div class="view-footer-link">
+    <a href="{{ url_for('main.edit', contact_id=contact.id) }}">Edit these contacts (PIN required)</a>
+  </div>
+
+</section>
+
+{% endblock %}

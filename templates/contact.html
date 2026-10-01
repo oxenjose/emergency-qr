@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Contact — Emergency QR{% endblock %}
+{% block description %}Get in touch with the Emergency QR team for questions, feedback, or partnership inquiries.{% endblock %}
+{% block topbar %}Contact{% endblock %}
+{% block content %}
+
+<div class="create-wrapper contact-wrapper">
+
+  <img src="{{ url_for('static', filename='images/favicon.ico') }}"
+       alt="Emergency QR" class="create-wrapper__icon">
+
+  <h1 class="create-wrapper__title">Questions? Feedback? Let's talk</h1>
+  <p class="create-wrapper__lede">
+    Have an idea, found a bug, or want to use Emergency QR in your organization?
+    Fill out the form and we'll get back to you.
+  </p>
+
+  <form method="POST" action="{{ url_for('main.contact') }}">
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="first-name">First Name <span class="required">(required)</span></label>
+        <input type="text" id="first-name" name="first-name" required>
+      </div>
+      <div class="form-field">
+        <label for="last-name">Last Name <span class="required">(required)</span></label>
+        <input type="text" id="last-name" name="last-name" required>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="email">Email <span class="required">(required)</span></label>
+      <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="form-field">
+      <label for="message">Message <span class="required">(required)</span></label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+
+    <div class="contact-actions">
+      <button type="submit" class="btn-send">SEND</button>
+    </div>
+
+  </form>
+
+</div>
+
+{% endblock %}

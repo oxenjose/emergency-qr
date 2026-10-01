@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Your QR is ready — Emergency QR{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
+{% block topbar %}Your QR is ready{% endblock %}
+{% block content %}
+
+<div class="created-wrapper">
+
+  <img src="{{ url_for('static', filename='images/favicon.ico') }}"
+       alt="Emergency QR" class="create-wrapper__icon">
+
+  <h1 class="create-wrapper__title">Your emergency QR is ready</h1>
+  <p class="create-wrapper__lede">
+    Print this QR and keep it in your wallet, phone case, or anywhere handy.
+    It works on any phone, no app required.
+  </p>
+
+  <img src="{{ url_for('qr.generate_qr', contact_id=contact.id) }}"
+     alt="Emergency QR code for {{ contact.owner_name }} — scan to see emergency contacts">
+  </div>
+
+  <div class="created-actions">
+    <a href="{{ url_for('main.view', contact_id=contact.id) }}"
+       class="btn-outline">Preview what others will see</a>
+  </div>
+
+  <hr class="created-divider">
+
+  <h2 class="created-subtitle">Download and print</h2>
+  <p class="created-print-lede">
+    Download a print-ready A4 PDF with as many copies as you need. Cut out
+    each card and stick it wherever it makes sense.
+  </p>
+
+  <form method="GET" action="{{ url_for('print.print_pdf', contact_id=contact.id) }}"
+        class="print-form">
+
+    <div class="print-form__group">
+      <div class="print-form__label">Size</div>
+      <div class="print-form__radios">
+        <label class="radio-card">
+          <input type="radio" name="size" value="phone" checked>
+          <span class="radio-card__box">
+            <span class="radio-card__title">Back of phone</span>
+            <span class="radio-card__size">5.5 × 6.5 cm</span>
+          </span>
+        </label>
+        <label class="radio-card">
+          <input type="radio" name="size" value="keychain">
+          <span class="radio-card__box">
+            <span class="radio-card__title">Keychain</span>
+            <span class="radio-card__size">3.8 × 4.8 cm</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="print-form__group">
+      <label for="copies" class="print-form__label">Copies</label>
+      <input type="number" id="copies" name="copies"
+             min="1" max="100" value="1" class="print-form__copies">
+    </div>
+
+    <button type="submit" class="btn-primary print-form__submit">
+      Download PDF
+    </button>
+
+    <p class="print-form__hint">A4 paper · Cut lines included · PDF format</p>
+
+  </form>
+
+</div>
+
+{% endblock %}

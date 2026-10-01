@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}QR not found — Emergency QR{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
+{% block topbar %}QR not found{% endblock %}
+{% block content %}
+
+<div class="error-wrapper error-wrapper--critical">
+
+  <div class="error-icon" aria-hidden="true">⚠️</div>
+
+  <h1 class="error-title">This QR code is no longer active</h1>
+  <p class="error-text">
+    The QR code you scanned doesn't point to any saved emergency contacts.
+    It may have been deleted by its owner, or the code may be damaged.
+  </p>
+
+  <div class="emergency-callout">
+    <div class="emergency-callout__title">If you are in an emergency right now</div>
+    <p class="emergency-callout__text">
+      Call your local emergency number immediately:
+    </p>
+    <ul class="emergency-callout__numbers">
+      <li><strong>112</strong> — European Union, Sweden</li>
+      <li><strong>911</strong> — United States, Canada</li>
+      <li><strong>999</strong> — United Kingdom</li>
+    </ul>
+    <p class="emergency-callout__note">
+      These services are free and available 24/7.
+    </p>
+  </div>
+
+  <p class="error-text error-text--small">
+    If the person you're with has a working QR code, try scanning it again.
+    If you have a photo of it, you can also upload it here:
+  </p>
+
+  <div class="error-actions">
+    <a href="{{ url_for('main.check') }}" class="btn-primary">Upload a QR photo</a>
+    <a href="{{ url_for('main.index') }}" class="btn-outline">Back to Home</a>
+  </div>
+
+</div>
+
+{% endblock %}

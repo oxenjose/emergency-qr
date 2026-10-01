@@ -1,0 +1,11 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+emergency.db
+auth
+auth-wal
+auth-shm
+*.db-shm
+*.db-wal
