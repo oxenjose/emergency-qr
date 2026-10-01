@@ -1,16 +1,18 @@
 import os
-import libsql
+import libsql_client
 from flask import g
 
+
 def get_db():
-    """Get a libsql database connection for the current request context."""
+    """Get a libsql_client sync connection for the current request."""
     db = getattr(g, '_database', None)
     if db is None:
-        db = g._database = libsql.connect(
-            database=os.environ['TURSO_DATABASE_URL'],
+        db = g._database = libsql_client.create_client_sync(
+            url=os.environ['TURSO_DATABASE_URL'],
             auth_token=os.environ['TURSO_AUTH_TOKEN']
         )
     return db
+
 
 def close_db(e=None):
     """Close the database connection at the end of the request."""
@@ -22,13 +24,14 @@ def close_db(e=None):
             pass
         g._database = None
 
+
 def init_db():
-    """Verify the database connection and create the table if it doesn't exist."""
-    conn = libsql.connect(
-        database=os.environ['TURSO_DATABASE_URL'],
+    """Create the contacts table if it doesn't exist."""
+    client = libsql_client.create_client_sync(
+        url=os.environ['TURSO_DATABASE_URL'],
         auth_token=os.environ['TURSO_AUTH_TOKEN']
     )
-    conn.execute('''
+    client.execute('''
         CREATE TABLE IF NOT EXISTS contacts (
             id TEXT PRIMARY KEY,
             owner_name TEXT NOT NULL,
@@ -43,5 +46,4 @@ def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
-    conn.commit()
-    conn.close()
+    client.close()
