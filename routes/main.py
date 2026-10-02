@@ -1,5 +1,5 @@
 import re
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash, Response
 from database.models import create_contact, get_contact, update_contact, verify_pin
 from routes.qr import decode_qr_from_image
 
@@ -40,7 +40,6 @@ def create():
 def created(contact_id):
     contact = get_contact(contact_id)
     if not contact:
-        # Rare case: someone lands here directly with a bad ID
         return redirect(url_for('main.index'))
     return render_template('created.html', contact=contact)
 
@@ -49,7 +48,6 @@ def created(contact_id):
 def view(contact_id):
     contact = get_contact(contact_id)
     if not contact:
-        # Critical: someone scanned a QR that no longer exists
         return render_template('qr_not_found.html'), 404
     return render_template('view.html', contact=contact)
 
@@ -58,7 +56,6 @@ def view(contact_id):
 def edit(contact_id):
     contact = get_contact(contact_id)
     if not contact:
-        # Same as above — could come from scanning an old QR
         return render_template('qr_not_found.html'), 404
 
     if request.method == 'POST':
@@ -144,3 +141,19 @@ def check():
         return redirect(url_for('main.view', contact_id=contact_id))
 
     return render_template('check.html')
+
+
+# ------------------------------------------------------------------
+# SEO: robots.txt and sitemap.xml
+# ------------------------------------------------------------------
+
+@main_bp.route('/robots.txt')
+def robots():
+    content = render_template('robots.txt')
+    return Response(content, mimetype='text/plain')
+
+
+@main_bp.route('/sitemap.xml')
+def sitemap():
+    content = render_template('sitemap.xml')
+    return Response(content, mimetype='application/xml')

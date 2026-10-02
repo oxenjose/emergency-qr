@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /view/
+Disallow: /edit/
+Disallow: /created/
+Disallow: /contact
+
+Sitemap: https://emergency-qr-uz8h.onrender.com/sitemap.xml
